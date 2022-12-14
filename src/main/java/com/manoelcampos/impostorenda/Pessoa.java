@@ -4,22 +4,27 @@ package com.manoelcampos.impostorenda;
  * @author Manoel Campos da Silva Filho
  */
 public abstract class Pessoa {
-    private long id;
-    private String nome;
+    private final long id;
+    private final String nome;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public Pessoa(long id, String nome) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    protected abstract double calculaImpostoRenda();
+
+    protected abstract double calculaImpostosAdicionais();
+
+    public final double calculaTotalImpostos() {
+        return calculaImpostoRenda() + calculaImpostosAdicionais();
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
